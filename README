@@ -1,0 +1,41 @@
+Author: Brent Arrington
+Version: 0.1
+Version History:
+	- 0.1 Initial Version
+
+Prerequisites: 
+
+This assumes you have MS Visual Web Developer 2010 Express installed and configured for your dev
+environment.
+
+MS Visual Web Developer 2010 Express can be downloaded at: http://www.microsoft.com/express/Web/
+	
+Once installed, we will bring this project into MS Visual Web Developer Express. To do this:
+
+1.) Unzip/move the contents of this zip file to your Visual Studio 2010 "Projects" directory.
+2.) To open the project, navigate to \Webservices-dotNET-Sample-Project\CascadeTest\CascadeTest and
+    double-click on the CascadeTest.csproj file
+
+After this you should see the Cascade Webservices project show up in your Visual Web Developer Express window. Do not be alarmed if 
+there are compilation errors, this is because you still need to add the C# client stubs for interacting 
+with the web services layer.
+
+To do this:
+
+1.) Right-click on the project ("CascadeTest") in the Solution Explorer window & select "Add Web Reference."
+2.) In the URL field enter the url to your Cascade AssetOperationService end point
+    (i.e. http://your-cascade-instance/ws/services/AssetOperationService?wsdl). In the
+    "Web reference name" field, enter "CascadeWS" and click "Add Reference."
+3.) Expand the newly added "CascadeWS" Web Reference in the Solution Explorer window and open the Reference.cs file.
+    This is the auto-generated C# implementation for the Cascade web services WSDL.  This file WILL NOT WORK as-is.
+4.) Open the \Webservices-dotNET-Sample-Project\CascadeWSDL.cs file in a separate editor window and copy the entire
+    contents of this file to your clipboard.
+5.) Return to the Reference.cs file opened in step #3 and replace the entire contents of this file with the code
+    copied from CascadeWSDL.cs and save.
+6.) Right-click on the project ("CascadeTest") in the Solution Exploerer window & select "Build."
+7.) Expand "CascadeWSTest.aspx" from the Solution Explorer window and open the "CascadeWSTest.aspx.cs" file.
+8.) Verify that the selected asset path and authentication information is valid for your Cascade instance
+    and modify as necessary.
+
+At this point you can test your application by clicking the "Start Debugging" button from the toolbar at the top 
+(it's the green "play" button).

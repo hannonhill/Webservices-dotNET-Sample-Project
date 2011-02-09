@@ -1,0 +1,5 @@
+c:\documents and settings\administrator\my documents\visual studio 2010\Projects\CascadeTest\CascadeTest\bin\CascadeTest.dll
+c:\documents and settings\administrator\my documents\visual studio 2010\Projects\CascadeTest\CascadeTest\bin\CascadeTest.pdb
+c:\documents and settings\administrator\my documents\visual studio 2010\Projects\CascadeTest\CascadeTest\obj\Debug\ResolveAssemblyReference.cache
+c:\documents and settings\administrator\my documents\visual studio 2010\Projects\CascadeTest\CascadeTest\obj\Debug\CascadeTest.dll
+c:\documents and settings\administrator\my documents\visual studio 2010\Projects\CascadeTest\CascadeTest\obj\Debug\CascadeTest.pdb

@@ -1,7 +1,8 @@
 Author: Brent Arrington
-Version: 0.1
+Version: 0.2
 Version History:
 	- 0.1 Initial Version
+ 	- 0.2 Clarifying the "show all files" option if nested Web Reference contents are not visible
 
 Prerequisites: 
 
@@ -26,7 +27,9 @@ To do this:
 2.) In the URL field enter the url to your Cascade AssetOperationService end point
     (i.e. http://your-cascade-instance/ws/services/AssetOperationService?wsdl). In the
     "Web reference name" field, enter "CascadeWS" and click "Add Reference."
-3.) Expand the newly added "CascadeWS" Web Reference in the Solution Explorer window and open the Reference.cs file.
+3.) Expand the newly added "CascadeWS" Web Reference in the Solution Explorer window and open the Reference.cs file
+    (Note: if you don't see any files under the "CascadeWS" reference, click the "Show All Files" butten in the 
+    Solution Explorer toolbar).
     This is the auto-generated C# implementation for the Cascade web services WSDL.  This file WILL NOT WORK as-is.
 4.) Open the \Webservices-dotNET-Sample-Project\CascadeWSDL.cs file in a separate editor window and copy the entire
     contents of this file to your clipboard.

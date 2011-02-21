@@ -174,6 +174,8 @@ namespace CascadeTest
                 {
                     nullStructuredData(nodes);
                 }
+                // null page xhtml
+                page.xhtml = null;
             }
 
             nullPageConfigurationValues(page.pageConfigurations);
@@ -295,77 +297,141 @@ namespace CascadeTest
         {
             if (sDataNodes != null)
             {
+                
                 for (int k = 0; k < sDataNodes.Length; k++)
                 {
-                    if (structureddatatype.asset == sDataNodes[k].type)
+                    structureddatanode thisNode = sDataNodes[k];
+                    if (structureddatatype.asset == thisNode.type)
                     {
-                        sDataNodes[k].text = null;
+                        thisNode.text = null;
 
-                        if (sDataNodes[k].assetType == structureddataassettype.block)
+                        if (thisNode.assetType == "block")//structureddataassettype.block)
                         {
-                            if (sDataNodes[k].blockId == null && sDataNodes[k].blockPath == null)
+                            if (thisNode.blockId == null && thisNode.blockPath == null)
                             {
-                                sDataNodes[k].blockPath = "";
+                                thisNode.blockPath = "";
                             }
                             else
                             {
-                                sDataNodes[k].blockId = null;
+                                thisNode.blockId = null;
                             }
+
+                            // null out the other asset type references
+                            thisNode.fileId = null;
+                            thisNode.filePath = null;
+                            thisNode.pageId = null;
+                            thisNode.pagePath = null;
+                            thisNode.symlinkId = null;
+                            thisNode.symlinkPath = null;
+                            thisNode.structuredDataNodes = null;
                         }
-                        else if (sDataNodes[k].assetType == structureddataassettype.file)
+                        else if (thisNode.assetType == "file")//structureddataassettype.file)
                         {
-                            if (sDataNodes[k].fileId == null && sDataNodes[k].filePath == null)
+                            if (thisNode.fileId == null && thisNode.filePath == null)
                             {
-                                sDataNodes[k].filePath = "";
+                                thisNode.filePath = "";
                             }
                             else
                             {
-                                sDataNodes[k].fileId = null;
+                                thisNode.fileId = null;
                             }
+
+                            // null out the other asset type references
+                            thisNode.blockId = null;
+                            thisNode.blockPath = null;
+                            thisNode.pageId = null;
+                            thisNode.pagePath = null;
+                            thisNode.symlinkId = null;
+                            thisNode.symlinkPath = null;
+                            thisNode.structuredDataNodes = null;
                         }
-                        else if (sDataNodes[k].assetType == structureddataassettype.page)
+                        else if (thisNode.assetType == "page")//structureddataassettype.page)
                         {
-                            if (sDataNodes[k].pageId == null && sDataNodes[k].pagePath == null)
+                            if (thisNode.pageId == null && thisNode.pagePath == null)
                             {
-                                sDataNodes[k].pagePath = "";
+                                thisNode.pagePath = "";
                             }
                             else
                             {
-                                sDataNodes[k].pageId = null;
+                                thisNode.pageId = null;
                             }
+
+                            // null out the other asset type references
+                            thisNode.fileId = null;
+                            thisNode.filePath = null;
+                            thisNode.blockId = null;
+                            thisNode.blockPath = null;
+                            thisNode.symlinkId = null;
+                            thisNode.symlinkPath = null;
+                            thisNode.structuredDataNodes = null;
                         }
-                        else if (sDataNodes[k].assetType == structureddataassettype.symlink)
+                        else if (thisNode.assetType == "symlink")//structureddataassettype.symlink)
                         {
-                            if (sDataNodes[k].symlinkId == null && sDataNodes[k].symlinkPath == null)
+                            if (thisNode.symlinkId == null && thisNode.symlinkPath == null)
                             {
-                                sDataNodes[k].symlinkPath = "";
+                                thisNode.symlinkPath = "";
                             }
                             else
                             {
-                                sDataNodes[k].symlinkId = null;
+                                thisNode.symlinkId = null;
                             }
+
+                            // null out the other asset type references
+                            thisNode.fileId = null;
+                            thisNode.filePath = null;
+                            thisNode.pageId = null;
+                            thisNode.pagePath = null;
+                            thisNode.blockId = null;
+                            thisNode.blockPath = null;
+                            thisNode.structuredDataNodes = null;
                         }
                     }
-                    else if (structureddatatype.group == sDataNodes[k].type)
+                    else if (structureddatatype.group == thisNode.type)
                     {
-                        structureddatanode[] sDataNodeArray = sDataNodes[k].structuredDataNodes;
+                        structureddatanode[] sDataNodeArray = thisNode.structuredDataNodes;
                         nullStructuredData(sDataNodeArray);
-                        sDataNodes[k].text = null;
-                        sDataNodes[k].assetType = null;
+                        thisNode.text = null;
+                        thisNode.assetType = null;
+
+                        // null out the other asset type references
+                        thisNode.blockId = null;
+                        thisNode.blockPath = null;
+                        thisNode.fileId = null;
+                        thisNode.filePath = null;
+                        thisNode.pageId = null;
+                        thisNode.pagePath = null;
+                        thisNode.symlinkId = null;
+                        thisNode.symlinkPath = null;
+
+                        thisNode.recycled = null;
+
                     }
-                    else if (structureddatatype.text == sDataNodes[k].type)
+                    else if (structureddatatype.text == thisNode.type)
                     {
-                        sDataNodes[k].assetType = null;
-                        sDataNodes[k].structuredDataNodes = null;
-                        if (sDataNodes[k].text == null)
+                        thisNode.assetType = null;
+                        thisNode.structuredDataNodes = null;
+                        if (thisNode.text == null)
                         {
-                            sDataNodes[k].text = "";
+                            thisNode.text = "";
                         }
+
+                        // null out the other asset type references
+                        thisNode.blockId = null;
+                        thisNode.blockPath = null;
+                        thisNode.fileId = null;
+                        thisNode.filePath = null;
+                        thisNode.pageId = null;
+                        thisNode.pagePath = null;
+                        thisNode.symlinkId = null;
+                        thisNode.symlinkPath = null;
+                        thisNode.structuredDataNodes = null;
+
+                        thisNode.recycled = null;
                     }
                     else
                     {
-                        sDataNodes[k].assetType = null;
-                        sDataNodes[k].text = null;
+                        thisNode.assetType = null;
+                        thisNode.text = null;
                     }
                 }
             }
@@ -912,7 +978,7 @@ namespace CascadeTest
                 contents += "<li>lastPublishedBy = " + p.lastPublishedBy + "</li>";
                 contents += "<li>lastPublishedDate = " + p.lastPublishedDate + "</li>";
                 contents += "<li>lastPublishedDateSpecified = " + p.lastPublishedDateSpecified + "</li>";
-                contents += "<li>metadata = " + p.metadata + "</li>";
+                contents += "<li>metadata = " + printMetadata(p.metadata) + "</li>";
                 contents += "<li>metadataSetId = " + p.metadataSetId + "</li>";
                 contents += "<li>metadataSetPath = " + p.metadataSetPath + "</li>";
                 contents += "<li>pageConfigurations = " + printPageConfigurations(p.pageConfigurations) + "</li>";
@@ -925,15 +991,189 @@ namespace CascadeTest
                 contents += "<li>shouldBePublishedSpecified = " + p.shouldBePublishedSpecified + "</li>";
                 contents += "<li>siteId = " + p.siteId + "</li>";
                 contents += "<li>siteName = " + p.siteName + "</li>";
-                contents += "<li>structuredData = " + p.structuredData + "</li>";
+                contents += "<li>structuredData = " + printStructuredData(p.structuredData) + "</li>";
                 contents += "<li>xhtml = " + p.xhtml + "</li>";
+                
 
                 contents += "</ul>";
+            }
+            else if (a.file != null)
+            {
+                contents += printFileData(a.file);
             }
 
             contents += "</ul>";
 
             return contents;
+        }
+
+        public static string printFileData(file file)
+        {
+            string val = "<li>File = ";
+
+            if (file != null)
+            {
+                val += "<ul>";
+                val += "<li>data = " + file.data + "</li>";
+                val += "<li>entityType = " + file.entityType + "</li>";
+                val += "<li>exirationFolderId = " + file.expirationFolderId +"</li>";
+                val += "<li>exirationFolderPath = " + file.expirationFolderPath + "</li>";
+                val += "<li>exirationFolderRecycled = " + file.expirationFolderRecycled + "</li>";
+                val += "<li>exirationFolderRecycledSpecified = " + file.expirationFolderRecycledSpecified + "</li>";
+                val += "<li>id = " + file.id + "</li>";
+                val += "<li>lastModifiedBy = " + file.lastModifiedBy + "</li>";
+                val += "<li>lastModifiedDate = " + file.lastModifiedDate + "</li>";
+                val += "<li>lastModifiedDateSpecified = " + file.lastModifiedDateSpecified + "</li>";
+                val += "<li>lastPublishedBy = " + file.lastPublishedBy + "</li>";
+                val += "<li>lastPublishedDate = " + file.lastPublishedDate + "</li>";
+                val += "<li>lastPublishedDateSpecified = " + file.lastPublishedDateSpecified + "</li>";
+                val += "<li>maintainAbsoluteLinks = " + file.maintainAbsoluteLinks + "</li>";
+                val += "<li>maintainAbsoluteLinksSpecified = " + file.maintainAbsoluteLinksSpecified + "</li>";
+                val += "<li>metadata = " + printMetadata(file.metadata) +"</li>";
+                val += "<li>metadataSetId = " + file.metadataSetId + "</li>";
+                val += "<li>metadataSetPath = " + file.metadataSetPath + "</li>";
+                val += "<li>name = " + file.name + "</li>";
+                val += "<li>parentFolderId = " + file.parentFolderId + "</li>";
+                val += "<li>parentFolderPath = " + file.parentFolderPath + "</li>";
+                val += "<li>path = " + file.path + "</li>";
+                val += "<li>rewriteLinks = " + file.rewriteLinks + "</li>";
+                val += "<li>rewriteLinksSpecified = " + file.rewriteLinksSpecified + "</li>";
+                val += "<li>shouldBeIndexed = " + file.shouldBeIndexed + "</li>";
+                val += "<li>shouldBeIndexedSpecified = " + file.shouldBeIndexedSpecified + "</li>";
+                val += "<li>shouldBePublished = " + file.shouldBePublished + "</li>";
+                val += "<li>shouldBePublishedSpecified = " + file.shouldBePublishedSpecified + "</li>";
+                val += "<li>siteId = " + file.siteId + "</li>";
+                val += "<li>siteName = " + file.siteName + "</li>";
+                val += "<li>text = " + file.text + "</li>";
+                val += "</ul>";
+            }
+            else
+            {
+                val += "null";
+            }
+
+            val += "</li>";
+            return val;
+        }
+
+        public static string printMetadata(metadata mData)
+        {
+            string val = "<ul>";
+
+            if (mData != null)
+            {
+                val += "<li>author = " + mData.author + "</li>";
+                val += "<li>displayName = " + mData.displayName + "</li>";
+                val += "<li>dynamicFields = " + printDynamicMetadata(mData.dynamicFields) + "</li>";
+                val += "<li>endDate = " + mData.endDate + "</li>";
+                val += "<li>endDateSpecified = " + mData.endDateSpecified + "</li>";
+                val += "<li>keywords = " + mData.keywords + "</li>";
+                val += "<li>metaDescription = " + mData.metaDescription + "</li>";
+                val += "<li>reviewDate = " + mData.reviewDate + "</li>";
+                val += "<li>reviewDateSpecified = " + mData.reviewDateSpecified + "</li>";
+                val += "<li>startDate = " + mData.startDate + "</li>";
+                val += "<li>startDateSpecified = " + mData.startDateSpecified + "</li>";
+                val += "<li>summary = " + mData.summary + "</li>";
+                val += "<li>teaser = " + mData.teaser + "</li>";
+                val += "<li>title = " + mData.title + "</li>";
+            }
+            else
+            {
+                return "null";
+            }
+
+            val += "</ul>";
+            return val;
+        }
+
+        public static string printDynamicMetadata(dynamicMetadataField[] dFields)
+        {
+            string val = "<ul>";
+
+            if (dFields != null)
+            {
+                foreach (dynamicMetadataField field in dFields)
+                {
+                    val += "<li>name = " + field.name + "</li>";
+                    val += "<li>values = " + printDynamicMetaDataFieldValues(field.fieldValues) + "</li>";
+                }
+            }
+            else
+            {
+                return "null";
+            }
+
+            val += "</ul>";
+            return val;
+        }
+
+        public static string printDynamicMetaDataFieldValues(fieldValue[] values)
+        {
+            string val = "<ul>";
+
+            foreach (fieldValue value in values)
+            {
+                val += "<li>" + value.value + "</li>";
+            }
+
+            val += "</ul>";
+            return val;
+        }
+
+        public static string printStructuredData(structureddata sData)
+        {
+            string val = "<ul>";
+
+            if (sData != null)
+            {
+                val += "<li>definitionId = " + sData.definitionId + "</li>";
+                val += "<li>definitionPath = " + sData.definitionPath + "</li>";
+                val += printStructuredDataNodes(sData.structuredDataNodes);
+            }
+            else
+            {
+                val += "<li>null</li>";
+            }
+
+            val += "</ul>";
+            return val;
+        }
+
+        public static string printStructuredDataNodes(structureddatanode[] sdNodes)
+        {
+            string val = "<li>structuredDataNodes = ";
+            
+            if (sdNodes != null && sdNodes.Length > 0)
+            {
+                
+                foreach (structureddatanode node in sdNodes)
+                {
+                    
+                    val += "<ul><li>NODE = </li><li><ul>";
+                    val += "<li>assetType = " + node.assetType + "</li>";
+                    val += "<li>blockId = " + node.blockId + "</li>";
+                    val += "<li>blockPath = " + node.blockPath + "</li>";
+                    val += "<li>fileId = " + node.fileId + "</li>";
+                    val += "<li>filePath = " + node.filePath + "</li>";
+                    val += "<li>identifier = " + node.identifier + "</li>";
+                    val += "<li>pageId = " + node.pageId + "</li>";
+                    val += "<li>pagePath = " + node.pagePath + "</li>";
+                    val += "<li>recycled = " + node.recycled + "</li>";
+                    val += printStructuredDataNodes(node.structuredDataNodes);
+                    val += "<li>symlinkId = " + node.symlinkId + "</li>";
+                    val += "<li>symlinkPath = " + node.symlinkPath + "</li>";
+                    val += "<li>text = " + node.text + "</li>";
+                    val += "<li>type = " + node.type + "</li>";
+                    val += "</ul></li></ul>";
+                }
+                
+            }
+            else
+            {
+                val += "empty";
+            }
+            val += "</li>";
+            return val;
         }
 
         public static string printWorkflowConfiguration(workflowconfiguration config)

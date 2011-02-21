@@ -13523,12 +13523,12 @@ namespace CascadeTest.CascadeWS
         }*/
 
         private structureddata structuredDataField;
+        [System.Xml.Serialization.XmlElementAttribute("structuredData", typeof(structureddata))]
         public structureddata structuredData
         {
             get
             {
-                if (structuredDataField == null ||
-                    structuredDataField.definitionPath == structuredDataField.definitionId)
+                if (structuredDataField == null)
                 {
                     return null;
                 }
@@ -13654,6 +13654,7 @@ namespace CascadeTest.CascadeWS
         }*/
 
         private string definitionIdField;
+        [System.Xml.Serialization.XmlElementAttribute("definitionId", typeof(string))]
         public string definitionId
         {
             get
@@ -13667,6 +13668,7 @@ namespace CascadeTest.CascadeWS
         }
 
         private string definitionPathField;
+        [System.Xml.Serialization.XmlElementAttribute("definitionPath", typeof(string))]
         public string definitionPath
         {
             get
@@ -13692,7 +13694,8 @@ namespace CascadeTest.CascadeWS
         }*/
 
         /// <remarks/>
-        //[System.Xml.Serialization.XmlArrayItemAttribute("structuredDataNode", IsNullable = false)]
+        //private ArrayList structuredDataNodesField;
+        [System.Xml.Serialization.XmlArrayItemAttribute("structuredDataNode", IsNullable = false)]
         public structureddatanode[] structuredDataNodes
         {
             get
@@ -13791,16 +13794,37 @@ namespace CascadeTest.CascadeWS
             }
         }*/
 
-        private structureddataassettype? assetTypeField;
-        //[System.Xml.Serialization.XmlElementAttribute("assetType", IsNullable = true)]
-        public structureddataassettype? assetType
+        // okay, this is really stupid...
+        // for some reason, any data type that must be explicitly declared as "Nullable" in C#
+        // renders serialized XML output like so:
+        // <myField nil="true"/>
+        // rather than simply omitting the element, resulting in SOAP validation errors if "nillable" is not set in the WSDL
+        // SO... for these cases, replacing non-natively-nullable types with simple string types...
+        //private structureddataassettype? assetTypeField;
+        private string assetTypeField;
+        [System.Xml.Serialization.XmlElement("assetType")]
+        public string assetType
         {
             get
             {
+                if (this.assetTypeField == null)
+                {
+                    return null;
+                }
                 return this.assetTypeField;
             }
             set
             {
+                string[] goodVals = { "block", "file", "page", "symlink" };
+                ArrayList validTypes = new ArrayList(goodVals);
+                if (value == "")
+                {
+                    value = null;
+                }
+                if (value != null && !validTypes.Contains(value))
+                {
+                    throw new Exception("Illegal StructuredData.AssetType value: '" + value + "'.  Must be one of the following: 'block', 'file', 'page', 'symlink' or null");
+                }
                 this.assetTypeField = value;
             }
         }
@@ -13883,8 +13907,16 @@ namespace CascadeTest.CascadeWS
             }
         }
 
-        private bool recycledField;
-        public bool recycled
+        // okay, this is really stupid...
+        // for some reason, any data type that must be explicitly declared as "Nullable" in C#
+        // renders serialized XML output like so:
+        // <myField nil="true"/>
+        // rather than simply omitting the element, resulting in SOAP validation errors if "nillable" is not set in the WSDL
+        // SO... for these cases, replacing non-natively-nullable types with simple string types...
+        //private bool? recycledField;
+        private string recycledField;
+        [System.Xml.Serialization.XmlElementAttribute("recycled")]
+        public string recycled
         {
             get
             {
@@ -13892,11 +13924,23 @@ namespace CascadeTest.CascadeWS
             }
             set
             {
+                string[] goodVals = { "true", "false" };
+                ArrayList validTypes = new ArrayList(goodVals);
+                if (value == "")
+                {
+                    value = null;
+                }
+                if (value != null && !validTypes.Contains(value))
+                {
+                    throw new Exception("Illegal StructuredData.AssetType value: '" + value + "'.  Must be one of the following: 'true', 'false' or null");
+                }
                 this.recycledField = value;
             }
         }
 
         private structureddatanode[] structuredDataNodesField;
+        //private ArrayList structuredDataNodesField;
+        [System.Xml.Serialization.XmlArrayItemAttribute("structuredDataNode", IsNullable = false)]
         public structureddatanode[] structuredDataNodes
         {
             get
@@ -13999,7 +14043,7 @@ namespace CascadeTest.CascadeWS
         page,
 
         /// <remarks/>
-        symlink,
+        symlink
     }
 
     /// <remarks/>
